@@ -7,7 +7,9 @@ function toggleDisplay() {
   fourPlayers.forEach((element) => element.classList.toggle('four-players'));
 }
 
-radioButtons.forEach((button) => button.addEventListener('change', toggleDisplay));
+radioButtons.forEach((button) =>
+  button.addEventListener('change', toggleDisplay)
+);
 
 /* === Complete player names === */
 
@@ -28,21 +30,37 @@ players.forEach((player) => player.addEventListener('keyup', fillPlayer));
 /* === Checking data and setting positions === */
 
 const pg = Array.from(document.querySelectorAll('.pg'));
-const pgThreePlayers = Array.from(document.querySelectorAll('.pg-three-players'));
+const pgThreePlayers = Array.from(
+  document.querySelectorAll('.pg-three-players')
+);
 const sfsc = Array.from(document.querySelectorAll('.sf-sc'));
-const sfscThreePlayers = Array.from(document.querySelectorAll('.sf-sc-three-players'));
+const sfscThreePlayers = Array.from(
+  document.querySelectorAll('.sf-sc-three-players')
+);
 const cds = Array.from(document.querySelectorAll('.cds'));
-const cdsThreePlayers = Array.from(document.querySelectorAll('.cds-three-players'));
+const cdsThreePlayers = Array.from(
+  document.querySelectorAll('.cds-three-players')
+);
 const pfpc = Array.from(document.querySelectorAll('.pf-pc'));
-const pfpcThreePlayers = Array.from(document.querySelectorAll('.pf-pc-three-players'));
+const pfpcThreePlayers = Array.from(
+  document.querySelectorAll('.pf-pc-three-players')
+);
 const cdp = Array.from(document.querySelectorAll('.cdp'));
-const cdpThreePlayers = Array.from(document.querySelectorAll('.cdp-three-players'));
+const cdpThreePlayers = Array.from(
+  document.querySelectorAll('.cdp-three-players')
+);
 const pos = Array.from(document.querySelectorAll('.pos'));
-const posThreePlayers = Array.from(document.querySelectorAll('.pos-three-players'));
+const posThreePlayers = Array.from(
+  document.querySelectorAll('.pos-three-players')
+);
 const setPoints = Array.from(document.querySelectorAll('.set-points'));
-const setPointsThreePlayers = Array.from(document.querySelectorAll('.set-points-three-players'));
+const setPointsThreePlayers = Array.from(
+  document.querySelectorAll('.set-points-three-players')
+);
 const sets = Array.from(document.querySelectorAll('.sets'));
-const setsThreePlayers = Array.from(document.querySelectorAll('.sets-three-players'));
+const setsThreePlayers = Array.from(
+  document.querySelectorAll('.sets-three-players')
+);
 const checkButton = document.querySelector('input[type=submit]');
 let threePlayers = true;
 
@@ -96,7 +114,8 @@ function finalPositionsThreePlayers() {
   //wins = [2 1 0]
   if (wins[0] == 2) {
     for (let i = 0; i < 3; i++) {
-      posThreePlayers[i].textContent = 3 - parseInt(pgThreePlayers[i].textContent);
+      posThreePlayers[i].textContent =
+        3 - parseInt(pgThreePlayers[i].textContent);
     }
     //wins = [1 1 1]
   } else {
@@ -255,7 +274,10 @@ function finalPositionsFourPlayers() {
     wins[loser1] = 0;
     let loser2 = wins.indexOf(1);
     sets.forEach((set) => {
-      if (set.dataset.number == winner1 + 1 && set.dataset.rival == winner2 + 1) {
+      if (
+        set.dataset.number == winner1 + 1 &&
+        set.dataset.rival == winner2 + 1
+      ) {
         if (set.textContent == 3) {
           pos[winner1].textContent = 1;
           pos[winner2].textContent = 2;
@@ -295,8 +317,12 @@ function finalPositionsFourPlayers() {
 
 function checkDataThreePlayers() {
   let dataIsCorrect = true;
-  players.forEach((player) => (player.style.backgroundColor = 'rgb(255, 255, 204)'));
-  setPointsThreePlayers.map((element) => (element.style.backgroundColor = 'rgb(255, 255, 204)'));
+  players.forEach(
+    (player) => (player.style.backgroundColor = 'rgb(255, 255, 204)')
+  );
+  setPointsThreePlayers.map(
+    (element) => (element.style.backgroundColor = 'rgb(255, 255, 204)')
+  );
   for (let i = 0; i < 3; i++) {
     if (players[i].value == '') {
       players[i].style.backgroundColor = 'orangered';
@@ -317,18 +343,27 @@ function checkDataThreePlayers() {
       const score2 = parseInt(setPointsThreePlayers[10 * i + j + 5].value);
       const maxScore = Math.max(score1, score2);
       const minScore = Math.min(score1, score2);
-      if (!matchFinished && !((maxScore == 11 && minScore < 10) || (minScore >= 10 && maxScore == minScore + 2))) {
+      if (
+        !matchFinished &&
+        !(
+          (maxScore == 11 && minScore < 10) ||
+          (minScore >= 10 && maxScore == minScore + 2)
+        )
+      ) {
         setPointsThreePlayers[10 * i + j].style.backgroundColor = 'orangered';
-        setPointsThreePlayers[10 * i + j + 5].style.backgroundColor = 'orangered';
+        setPointsThreePlayers[10 * i + j + 5].style.backgroundColor =
+          'orangered';
         dataIsCorrect = false;
       } else if (!matchFinished) {
         if (score1 > score2) {
-          setsThreePlayers[2 * i].textContent = parseInt(setsThreePlayers[2 * i].textContent) + 1;
+          setsThreePlayers[2 * i].textContent =
+            parseInt(setsThreePlayers[2 * i].textContent) + 1;
           if (setsThreePlayers[2 * i].textContent == 3) {
             matchFinished = true;
           }
         } else {
-          setsThreePlayers[2 * i + 1].textContent = parseInt(setsThreePlayers[2 * i + 1].textContent) + 1;
+          setsThreePlayers[2 * i + 1].textContent =
+            parseInt(setsThreePlayers[2 * i + 1].textContent) + 1;
           if (setsThreePlayers[2 * i + 1].textContent == 3) {
             matchFinished = true;
           }
@@ -336,7 +371,8 @@ function checkDataThreePlayers() {
       } else if (matchFinished) {
         if (maxScore > 0) {
           setPointsThreePlayers[10 * i + j].style.backgroundColor = 'orangered';
-          setPointsThreePlayers[10 * i + j + 5].style.backgroundColor = 'orangered';
+          setPointsThreePlayers[10 * i + j + 5].style.backgroundColor =
+            'orangered';
           dataIsCorrect = false;
         } else {
           setPointsThreePlayers[10 * i + j].value = '';
@@ -356,8 +392,12 @@ function checkDataThreePlayers() {
 
 function checkDataFourPlayers() {
   let dataIsCorrect = true;
-  players.forEach((player) => (player.style.backgroundColor = 'rgb(255, 255, 204)'));
-  setPoints.map((element) => (element.style.backgroundColor = 'rgb(255, 255, 204)'));
+  players.forEach(
+    (player) => (player.style.backgroundColor = 'rgb(255, 255, 204)')
+  );
+  setPoints.map(
+    (element) => (element.style.backgroundColor = 'rgb(255, 255, 204)')
+  );
   players.forEach((player) => {
     if (player.value == '') {
       player.style.backgroundColor = 'orangered';
@@ -378,7 +418,13 @@ function checkDataFourPlayers() {
       const score2 = parseInt(setPoints[10 * i + j + 5].value);
       const maxScore = Math.max(score1, score2);
       const minScore = Math.min(score1, score2);
-      if (!matchFinished && !((maxScore == 11 && minScore < 10) || (minScore >= 10 && maxScore == minScore + 2))) {
+      if (
+        !matchFinished &&
+        !(
+          (maxScore == 11 && minScore < 10) ||
+          (minScore >= 10 && maxScore == minScore + 2)
+        )
+      ) {
         setPoints[10 * i + j].style.backgroundColor = 'orangered';
         setPoints[10 * i + j + 5].style.backgroundColor = 'orangered';
         dataIsCorrect = false;
@@ -389,7 +435,8 @@ function checkDataFourPlayers() {
             matchFinished = true;
           }
         } else {
-          sets[2 * i + 1].textContent = parseInt(sets[2 * i + 1].textContent) + 1;
+          sets[2 * i + 1].textContent =
+            parseInt(sets[2 * i + 1].textContent) + 1;
           if (sets[2 * i + 1].textContent == 3) {
             matchFinished = true;
           }
@@ -431,5 +478,7 @@ function roundThreeDecimals(num) {
   return Math.round((num + Number.EPSILON) * 1000) / 1000;
 }
 
-radioButtons.forEach((button) => button.addEventListener('change', () => (threePlayers = !threePlayers)));
+radioButtons.forEach((button) =>
+  button.addEventListener('change', () => (threePlayers = !threePlayers))
+);
 checkButton.addEventListener('click', checkData);
